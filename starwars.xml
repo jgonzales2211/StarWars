@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+ <xsl:key name="director-key" match="director" use="lastname"/>
+
+ 
+ <xsl:template match="/">
+ <html>
+ <body>
+ <h2>Star Wars</h2>
+ <table border="1">
+ <tr>
+ <th>Title</th>
+ <th>Director</th>
+ <th>Year</th>
+ <th>Episode</th>
+ </tr>
+          
+<xsl:apply-templates select="starwars/movie">
+<xsl:sort select="director/lastname"/>
+</xsl:apply-templates>
+</table>
+</body>
+</html>
+</xsl:template>
+
+ <xsl:template match="movie">
+ <tr>
+ <td>
+<xsl:value-of select="title"/>
+ </td>
+ <td>
+
+<xsl:value-of select="concat(director/firstname, ' ', director/lastname)"/>
+ </td>
+<td>
+<xsl:value-of select="year"/>
+ </td>
+ <td>
+ <xsl:value-of select="episode"/>
+ </td>
+ </tr>
+</xsl:template>
+
+</xsl:stylesheet>
